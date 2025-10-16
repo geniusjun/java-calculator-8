@@ -4,7 +4,7 @@ import calculator.global.CustomException;
 import calculator.global.ErrorMessage;
 import camp.nextstep.edu.missionutils.Console;
 
-public class ConsoleReader {
+public final class ConsoleReader {
     public static String readMessage() {
         return Validator.validate(Console.readLine());
     }
