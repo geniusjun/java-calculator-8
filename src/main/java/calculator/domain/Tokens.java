@@ -31,9 +31,9 @@ public class Tokens {
         }
 
         private static List<String> splitWithCustom(String input) {
-            int lf = lineFeedIndex(input);
-            final char custom = getCustomDelimiter(input.substring(2, lf));
-            return Arrays.asList(input); // 임시
+            int lineFeedIndex = lineFeedIndex(input);
+            final char custom = getCustomDelimiter(input.substring(2, lineFeedIndex));
+            return split(input.substring(lineFeedIndex + 1), makeDelimiter(custom));
         }
 
         private static boolean hasCustom(String input) {
@@ -53,6 +53,10 @@ public class Tokens {
                 throw CustomException.from(ErrorMessage.INVALID_CUSTOM_DELIMITER);
             }
             return custom.charAt(0);
+        }
+
+        private static String makeDelimiter(char input) {
+            return BASE_DELIMITER + "|" + Pattern.quote(String.valueOf(input));
         }
 
         private static List<String> split(String body, String delimiter) {
