@@ -32,7 +32,7 @@ public class Tokens {
 
         private static List<String> splitWithCustom(String input) {
             int lineFeedIndex = lineFeedIndex(input);
-            final char custom = getCustomDelimiter(input.substring(2, lineFeedIndex));
+            final char custom = getCustomDelimiter(input.substring(CUSTOM_HEADER.length(), lineFeedIndex));
             return split(input.substring(lineFeedIndex + 1), makeDelimiter(custom));
         }
 
@@ -41,10 +41,11 @@ public class Tokens {
         }
 
         private static int lineFeedIndex(String input) {
-            if (input.indexOf(LINEFEED) < 0) {
+            int index = input.indexOf(LINEFEED);
+            if (index < 0) {
                 throw CustomException.from(ErrorMessage.INVALID_LINEFEED);
             }
-            return LINEFEED;
+            return index;
         }
 
         private static char getCustomDelimiter(String custom) {
