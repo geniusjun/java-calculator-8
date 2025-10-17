@@ -1,6 +1,8 @@
 package calculator.domain;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Tokens {
     private final List<String> tokens;
@@ -10,7 +12,32 @@ public class Tokens {
     }
 
     public static Tokens from(String input) {
-        // TODO: 헤더 파싱(//<char>\n), 구분자 집합 구성, 토큰화, 빈 토큰 검증
-        return new Tokens(List.of(input));
+        List<String> split = Parser.split(input);
+        return new Tokens(split);
     }
+
+    private static class Parser {
+        private static final String BASE_DELIMITER = Pattern.quote(",") + "|" + Pattern.quote(":");
+        private static final String CUSTOM_HEADER = "//";
+
+        public static List<String> split(String input) {
+            if (hasCustom(input)) {
+                return splitWithCustom(input);
+            }
+            return split(input, BASE_DELIMITER);
+        }
+
+        private static List<String> splitWithCustom(String input) {
+            return Arrays.asList(input); // 임시
+        }
+
+        private static boolean hasCustom(String input) {
+            return input.startsWith(CUSTOM_HEADER);
+        }
+
+        private static List<String> split(String body, String delimiter) {
+            return Arrays.asList(body.split(delimiter, -1));
+        }
+    }
+
 }
