@@ -41,8 +41,7 @@ public class Tokens {
         }
 
         private static int lineFeedIndex(String input) {
-            int lineFeed = input.indexOf(LINEFEED);
-            if (lineFeed < 0) {
+            if (input.indexOf(LINEFEED) < 0) {
                 throw CustomException.from(ErrorMessage.INVALID_LINEFEED);
             }
             return LINEFEED;
