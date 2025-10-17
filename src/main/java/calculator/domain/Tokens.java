@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import calculator.global.CustomException;
+import calculator.global.ErrorMessage;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -19,6 +21,7 @@ public class Tokens {
     private static class Parser {
         private static final String BASE_DELIMITER = Pattern.quote(",") + "|" + Pattern.quote(":");
         private static final String CUSTOM_HEADER = "//";
+        private static final char LINEFEED = '\n';
 
         public static List<String> split(String input) {
             if (hasCustom(input)) {
@@ -28,11 +31,20 @@ public class Tokens {
         }
 
         private static List<String> splitWithCustom(String input) {
+            int lf = lineFeedIndex(input);
             return Arrays.asList(input); // 임시
         }
 
         private static boolean hasCustom(String input) {
             return input.startsWith(CUSTOM_HEADER);
+        }
+
+        private static int lineFeedIndex(String input) {
+            int lineFeed = input.indexOf(LINEFEED);
+            if (lineFeed < 0) {
+                throw CustomException.from(ErrorMessage.INVALID_LINEFEED);
+            }
+            return LINEFEED;
         }
 
         private static List<String> split(String body, String delimiter) {
