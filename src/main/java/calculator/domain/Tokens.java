@@ -14,7 +14,7 @@ public class Tokens {
     }
 
     public static Tokens from(String input) {
-        List<String> split = Parser.split(input);
+        List<String> split = Validator.validateEmpty(Parser.split(input));
         return new Tokens(split);
     }
 
@@ -60,6 +60,15 @@ public class Tokens {
 
         private static List<String> split(String body, String delimiter) {
             return Arrays.asList(body.split(delimiter, -1));
+        }
+    }
+
+    private static class Validator {
+        public static List<String> validateEmpty(List<String> tokens) {
+            if (tokens.stream().anyMatch(String::isEmpty)) {
+                throw CustomException.from(ErrorMessage.EMPTY_TOKEN_ERROR);
+            }
+            return tokens;
         }
     }
 
