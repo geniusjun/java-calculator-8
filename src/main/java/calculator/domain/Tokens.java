@@ -18,6 +18,10 @@ public class Tokens {
         return new Tokens(split);
     }
 
+    public List<String> getTokens() {
+        return tokens;
+    }
+
     private static class Parser {
         private static final String BASE_DELIMITER = Pattern.quote(",") + "|" + Pattern.quote(":");
         private static final String CUSTOM_HEADER = "//";
