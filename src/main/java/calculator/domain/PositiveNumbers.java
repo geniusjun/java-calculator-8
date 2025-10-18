@@ -22,6 +22,12 @@ public class PositiveNumbers {
         return new PositiveNumbers(numbers);
     }
 
+    public int sum() {
+        return positiveNumbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
     private static class Parser {
         public static int parseStringToInt(String token) {
             isNumber(token);
