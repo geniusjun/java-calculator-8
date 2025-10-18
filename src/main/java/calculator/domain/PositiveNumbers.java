@@ -15,7 +15,9 @@ public class PositiveNumbers {
     public static PositiveNumbers from(Tokens tokens) {
         List<Integer> numbers = new ArrayList<>();
         for (String token : tokens.getTokens()) {
-            numbers.add(Parser.parseStringToInt(token));
+            int value = Parser.parseStringToInt(token);
+            Validator.isPositive(value);
+            numbers.add(value);
         }
         return new PositiveNumbers(numbers);
     }
@@ -29,6 +31,14 @@ public class PositiveNumbers {
         private static void isNumber(String token) {
             if (!token.chars().allMatch(Character::isDigit)) {
                 throw CustomException.from(ErrorMessage.INVALID_NUMBER_FORMAT);
+            }
+        }
+    }
+
+    private static final class Validator {
+        public static void isPositive(int v) {
+            if (v <= 0) {
+                throw CustomException.from(ErrorMessage.INVALID_NUMBER_POSITIVE);
             }
         }
     }
