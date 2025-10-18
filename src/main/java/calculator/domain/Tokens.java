@@ -25,7 +25,7 @@ public class Tokens {
     private static class Parser {
         private static final String BASE_DELIMITER = Pattern.quote(",") + "|" + Pattern.quote(":");
         private static final String CUSTOM_HEADER = "//";
-        private static final char LINEFEED = '\n';
+        private static final String LINEFEED = "\\n";
 
         public static List<String> split(String input) {
             if (hasCustom(input)) {
@@ -37,7 +37,7 @@ public class Tokens {
         private static List<String> splitWithCustom(String input) {
             int lineFeedIndex = lineFeedIndex(input);
             final char custom = getCustomDelimiter(input.substring(CUSTOM_HEADER.length(), lineFeedIndex));
-            return split(input.substring(lineFeedIndex + 1), makeDelimiter(custom));
+            return split(input.substring(lineFeedIndex + LINEFEED.length()), makeDelimiter(custom));
         }
 
         private static boolean hasCustom(String input) {
