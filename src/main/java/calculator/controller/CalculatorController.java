@@ -17,6 +17,6 @@ public class CalculatorController {
 
     public void calculate() {
         PositiveNumbers numbers = PositiveNumbers.from(Tokens.from(inputView.requestLine()));
-        int sum = numbers.sum();
+        outputView.result(numbers.sum());
     }
 }
