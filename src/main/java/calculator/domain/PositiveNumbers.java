@@ -15,9 +15,7 @@ public class PositiveNumbers {
     public static PositiveNumbers from(Tokens tokens) {
         List<Integer> numbers = new ArrayList<>();
         for (String token : tokens.getTokens()) {
-            int value = Parser.parseStringToInt(token);
-            Validator.isPositive(value);
-            numbers.add(value);
+            numbers.add(Validator.requirePositive(Parser.parseStringToInt(token)));
         }
         return new PositiveNumbers(numbers);
     }
@@ -42,10 +40,11 @@ public class PositiveNumbers {
     }
 
     private static final class Validator {
-        public static void isPositive(int v) {
-            if (v <= 0) {
+        public static int requirePositive(int value) {
+            if (value <= 0) {
                 throw CustomException.from(ErrorMessage.INVALID_NUMBER_POSITIVE);
             }
+            return value;
         }
     }
 }
