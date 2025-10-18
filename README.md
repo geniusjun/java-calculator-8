@@ -28,7 +28,7 @@
 
 ### 덧셈 계산 기능
 
-- [] PositiveNumbers.sum()을 호출하여 합계를 계산한다.
+- [x] PositiveNumbers.sum()을 호출하여 합계를 계산한다.
 
 ### 결과를 출력하는 기능
 

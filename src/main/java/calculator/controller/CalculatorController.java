@@ -1,5 +1,7 @@
 package calculator.controller;
 
+import calculator.domain.PositiveNumbers;
+import calculator.domain.Tokens;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -14,7 +16,7 @@ public class CalculatorController {
     }
 
     public void calculate() {
-        String a = inputView.requestLine(); // 임
-        System.out.println(a);
+        PositiveNumbers numbers = PositiveNumbers.from(Tokens.from(inputView.requestLine()));
+        int sum = numbers.sum();
     }
 }
