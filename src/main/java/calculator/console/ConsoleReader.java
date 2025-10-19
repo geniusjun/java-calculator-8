@@ -14,7 +14,7 @@ public final class ConsoleReader {
             return validateBlank(message);
         }
 
-        private static String validateBlank(String message) {
+        private static String validateBlank(final String message) {
             if (message.isBlank()) {
                 throw CustomException.from(ErrorMessage.BLANK_INPUT_ERROR);
             }
