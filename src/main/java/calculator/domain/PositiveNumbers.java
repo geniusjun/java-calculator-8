@@ -28,15 +28,13 @@ public class PositiveNumbers {
 
     private static class Parser {
         public static int parseStringToInt(String token) {
-            isNumber(token);
-            return Integer.parseInt(token);
-        }
-
-        private static void isNumber(String token) {
-            if (!token.chars().allMatch(Character::isDigit)) {
+            try {
+                return Integer.parseInt(token);
+            } catch (NumberFormatException e) {
                 throw CustomException.from(ErrorMessage.INVALID_NUMBER_FORMAT);
             }
         }
+        
     }
 
     private static final class Validator {
