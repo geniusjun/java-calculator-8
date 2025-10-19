@@ -9,7 +9,7 @@ import calculator.global.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class TokenTest {
+public class TokensTest {
 
     @Test
     @DisplayName("기본 구분자(: ,)로 분리한다.")
