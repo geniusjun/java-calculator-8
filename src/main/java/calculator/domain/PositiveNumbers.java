@@ -2,7 +2,6 @@ package calculator.domain;
 
 import calculator.global.CustomException;
 import calculator.global.ErrorMessage;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PositiveNumbers {
@@ -13,10 +12,10 @@ public class PositiveNumbers {
     }
 
     public static PositiveNumbers from(Tokens tokens) {
-        List<Integer> numbers = new ArrayList<>();
-        for (String token : tokens.getTokens()) {
-            numbers.add(Validator.requirePositive(Parser.parseStringToInt(token)));
-        }
+        List<Integer> numbers = tokens.stream()
+                .map(Parser::parseStringToInt)
+                .map(Validator::requirePositive)
+                .toList();
         return new PositiveNumbers(numbers);
     }
 
@@ -34,7 +33,7 @@ public class PositiveNumbers {
                 throw CustomException.from(ErrorMessage.INVALID_NUMBER_FORMAT);
             }
         }
-        
+
     }
 
     private static final class Validator {

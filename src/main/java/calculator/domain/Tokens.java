@@ -5,6 +5,7 @@ import calculator.global.ErrorMessage;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class Tokens {
     private final List<String> tokens;
@@ -18,8 +19,8 @@ public class Tokens {
         return new Tokens(split);
     }
 
-    public List<String> getTokens() {
-        return tokens;
+    public Stream<String> stream() {
+        return tokens.stream();
     }
 
     private static class Parser {
