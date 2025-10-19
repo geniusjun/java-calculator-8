@@ -19,7 +19,7 @@ public class TokensTest {
         // when
         Tokens tokens = Tokens.from(input);
         // then
-        assertThat(tokens.getTokens()).containsExactly("1", "2", "3");
+        assertThat(tokens.stream().toList()).containsExactly("1", "2", "3");
     }
 
     @Test
@@ -30,7 +30,7 @@ public class TokensTest {
         // when
         Tokens tokens = Tokens.from(input);
         // then
-        assertThat(tokens.getTokens()).containsExactly("1", "2", "3");
+        assertThat(tokens.stream().toList()).containsExactly("1", "2", "3");
     }
 
     @Test
