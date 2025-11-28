@@ -14,10 +14,8 @@ public class Numbers {
     }
 
     public int sum() {
-        int sum = 0;
-        for (Number number : numbers) {
-            sum += number.getNumber();
-        }
-        return sum;
+        return numbers.stream()
+                .mapToInt(Number::getNumber)
+                .sum();
     }
 }
