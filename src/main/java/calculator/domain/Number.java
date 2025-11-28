@@ -15,6 +15,10 @@ public class Number {
         return new Number(num);
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     private static void validatePositive(int num) {
         if (num <= 0) {
             throw new IllegalArgumentException(INVALID_POSITIVE_NUMBER.getMessage());

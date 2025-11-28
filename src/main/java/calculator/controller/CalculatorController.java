@@ -18,6 +18,7 @@ public class CalculatorController {
     public void run() {
         outputView.printStartMessage();
         Numbers numbers = Numbers.from(Parser.parseStringToNumber(inputView.readLine()));
+        int sum = numbers.sum();
 
     }
 }
