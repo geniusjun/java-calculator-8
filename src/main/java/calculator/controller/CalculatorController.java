@@ -17,8 +17,17 @@ public class CalculatorController {
 
     public void run() {
         outputView.printStartMessage();
-        Numbers numbers = Numbers.from(Parser.parseStringToNumber(inputView.readLine()));
+        Numbers numbers = parseInput(inputView.readLine());
         int sum = numbers.sum();
         outputView.printSum(sum);
+    }
+
+    private Numbers parseInput(String input) {
+        if (input.startsWith("/")) {
+            String custom = input.substring(2, 3);
+            String customInput = input.substring(5);
+            return Numbers.from(Parser.parseStringToNumberCustom(customInput, custom));
+        }
+        return Numbers.from(Parser.parseStringToNumber(input));
     }
 }
