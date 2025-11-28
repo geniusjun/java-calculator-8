@@ -1,5 +1,7 @@
 package calculator.controller;
 
+import calculator.domain.Numbers;
+import calculator.global.Parser;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -15,6 +17,7 @@ public class CalculatorController {
 
     public void run() {
         outputView.printStartMessage();
-        String str = inputView.readLine();
+        Numbers numbers = Numbers.from(Parser.parseStringToNumber(inputView.readLine()));
+
     }
 }
